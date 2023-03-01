@@ -1,0 +1,22 @@
+.App {
+  width: 70%;
+  margin: auto;
+  margin-top: 2em;
+  box-shadow: rgba(0, 0, 0, 0.4) 0px 2px 4px,
+    rgba(0, 0, 0, 0.3) 0px 7px 13px -3px, rgba(0, 0, 0, 0.2) 0px -3px 0px inset;
+  padding: 1.5em;
+  border-radius: 12px;
+}
+
+/* ---------- */
+.formDiv {
+  width: 60%;
+  margin: auto;
+}
+input {
+  height: 2.7em;
+}
+.rupeeSpan {
+  background-color: white;
+  color: gray;
+}
