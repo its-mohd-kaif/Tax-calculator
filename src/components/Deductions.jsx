@@ -1,14 +1,34 @@
-import React, { useContext, useRef, useState } from "react";
+import React, { useContext, useEffect, useRef, useState } from "react";
 import { incomeContext } from "../App";
 function Deductions() {
+  // Ref for input fields
   const ded_80Cref = useRef();
   const ded_80Dref = useRef();
   const ded_80TTAref = useRef();
   const ded_TARref = useRef();
-  const regex = /^[1-9]\d*$/;
+  //  Regex for validation
+  const regex = /^[0-9]\d*$/;
+  // UseConext For Storing Form Input Field Data
   const data = useContext(incomeContext);
   const [check, setCheck] = useState(false);
+  // UseEffect For persist input fields data
+  useEffect(() => {
+    if (data.deduction.ded_80Cref !== "") {
+      ded_80Cref.current.value = data.deduction.ded_80Cref;
+    }
+    if (data.deduction.ded_80Dref !== "") {
+      ded_80Dref.current.value = data.deduction.ded_80Dref;
+    }
+    if (data.deduction.ded_80TTAref !== "") {
+      ded_80TTAref.current.value = data.deduction.ded_80TTAref;
+    }
+    if (data.deduction.ded_TARref !== "") {
+      ded_TARref.current.value = data.deduction.ded_TARref;
+    }
+  }, []);
+  // Input Handler Function
   const inputHandler = () => {
+    // Check Validation
     if (regex.test(ded_80Cref.current.value) === false) {
       ded_80Cref.current.value = "";
     } else if (regex.test(ded_80Dref.current.value) === false) {
@@ -18,6 +38,7 @@ function Deductions() {
     } else if (regex.test(ded_TARref.current.value) === false) {
       ded_TARref.current.value = "";
     } else {
+      // Set Data Into Context State
       data.setDeduction({
         ded_80Cref:
           Number(ded_80Cref.current.value) > 150000
@@ -36,7 +57,7 @@ function Deductions() {
       });
     }
   };
-  console.log(data);
+  // Checkbox(Metro) Field Handler
   const metroHandler = (e) => {
     if (e.target.checked === true) {
       setCheck(true);
@@ -67,7 +88,6 @@ function Deductions() {
             type="text"
             class="form-control"
             aria-label="Amount (to the nearest dollar)"
-            placeholder="Deductions 80C"
             value="50000 (Standard Deduction)"
           />
         </div>
@@ -79,7 +99,7 @@ function Deductions() {
             type="text"
             class="form-control"
             aria-label="Amount (to the nearest dollar)"
-            placeholder="Deductions 80C"
+            placeholder="Deductions 80C*"
           />
         </div>
         <div class="input-group mb-3">
@@ -90,7 +110,7 @@ function Deductions() {
             type="text"
             class="form-control"
             aria-label="Amount (to the nearest dollar)"
-            placeholder="Deductions 80D"
+            placeholder="Deductions 80D*"
           />
         </div>
         <div class="input-group mb-3">
@@ -101,7 +121,7 @@ function Deductions() {
             type="text"
             class="form-control"
             aria-label="Amount (to the nearest dollar)"
-            placeholder="Deductions 80TTA"
+            placeholder="Deductions 80TTA*"
           />
         </div>
         <div class="input-group mb-3">
@@ -112,7 +132,7 @@ function Deductions() {
             type="text"
             class="form-control"
             aria-label="Amount (to the nearest dollar)"
-            placeholder="Total Annual Rent"
+            placeholder="Total Annual Rent*"
           />
         </div>
       </div>

@@ -8,21 +8,57 @@ import Typography from "@mui/material/Typography";
 import IncomeDetails from "./IncomeDetails";
 import Deductions from "./Deductions";
 import Summary from "./Summary";
+import { incomeContext } from "../App";
 
 const steps = ["INCOME DETAILS", "DEDUCTIONS", "SUMMARY"];
-
+// Stepper Component
 export default function LinearStepper() {
   const [activeStep, setActiveStep] = React.useState(0);
+  const [message, setMessage] = React.useState("");
+  const data = React.useContext(incomeContext);
+  // Handler Next Function
   const handleNext = () => {
-    setActiveStep((prevActiveStep) => prevActiveStep + 1);
+    if (
+      activeStep === 0 &&
+      (data.income.salary === "" ||
+        data.income.hra === "" ||
+        data.income.lta === "" ||
+        data.income.aio === "")
+    ) {
+      setMessage("Manadtory to fill all details !!");
+    } else if (
+      activeStep === 1 &&
+      (data.deduction.ded_80Cref === "" ||
+        data.deduction.ded_80Dref === "" ||
+        data.deduction.ded_80TTAref === "" ||
+        data.deduction.ded_TARref === "")
+    ) {
+      setMessage("Manadtory to fill all details !!");
+    } else {
+      setMessage("");
+      setActiveStep((prevActiveStep) => prevActiveStep + 1);
+    }
   };
-
+  // Handler Back Function
   const handleBack = () => {
     setActiveStep((prevActiveStep) => prevActiveStep - 1);
   };
-
+  // Handle Reset Function
   const handleReset = () => {
     setActiveStep(0);
+    data.setIncome({
+      salary: "",
+      hra: "",
+      lta: "",
+      aio: "",
+    });
+    data.setDeduction({
+      ded_80Cref: "",
+      ded_80Dref: "",
+      ded_80TTAref: "",
+      ded_TARref: "",
+      metro: false,
+    });
   };
 
   return (
@@ -41,9 +77,7 @@ export default function LinearStepper() {
       </Stepper>
       {activeStep === steps.length ? (
         <React.Fragment>
-          <Typography sx={{ mt: 2, mb: 1 }}>
-            All steps completed - you&apos;re finished
-          </Typography>
+          <Typography sx={{ mt: 2, mb: 1 }}>All steps completed :)</Typography>
           <Box sx={{ display: "flex", flexDirection: "row", pt: 2 }}>
             <Box sx={{ flex: "1 1 auto" }} />
             <Button onClick={handleReset}>Reset</Button>
@@ -52,6 +86,7 @@ export default function LinearStepper() {
       ) : (
         <React.Fragment>
           <Typography sx={{ mt: 2, mb: 1 }}>
+            {/* Call Component */}
             Step&nbsp;{activeStep + 1}
             {activeStep === 0 ? (
               <IncomeDetails />
@@ -61,6 +96,15 @@ export default function LinearStepper() {
               <Summary />
             ) : null}
           </Typography>
+          {message !== "" ? (
+            <div
+              class="alert alert-warning alert-dismissible fade show"
+              role="alert"
+            >
+              {message}
+            </div>
+          ) : null}
+
           <Box sx={{ display: "flex", flexDirection: "row", pt: 2 }}>
             <Button
               color="inherit"

@@ -1,3 +1,4 @@
+/* CSS For APP Component */
 .App {
   width: 70%;
   margin: auto;
@@ -9,13 +10,18 @@
 }
 
 /* ---------- */
+
+/* CSS For Form Main Din*/
+
 .formDiv {
   width: 60%;
   margin: auto;
 }
+
 input {
   height: 2.7em;
 }
+
 .rupeeSpan {
   background-color: white;
   color: gray;

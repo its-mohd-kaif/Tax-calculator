@@ -1,16 +1,34 @@
-import React, { useContext, useRef} from "react";
+import React, { useContext, useEffect, useRef } from "react";
 import { incomeContext } from "../App";
 
 function IncomeDetails() {
+  // UseConext For Storing Form Input Field Data
   const data = useContext(incomeContext);
-  console.log("data", data);
+  // Ref for input fields
   const salaryRef = useRef();
   const hraRef = useRef();
   const ltaRef = useRef();
   const aioRef = useRef();
-  const regex = /^[1-9]\d*$/;
-
+  // Regex for validation
+  const regex = /^[0-9]\d*$/;
+  // UseEffect For persist input fields data
+  useEffect(() => {
+    if (data.income.salary !== "") {
+      salaryRef.current.value = data.income.salary;
+    }
+    if (data.income.hra !== "") {
+      hraRef.current.value = data.income.hra;
+    }
+    if (data.income.lta !== "") {
+      ltaRef.current.value = data.income.lta;
+    }
+    if (data.income.aio !== "") {
+      aioRef.current.value = data.income.aio;
+    }
+  }, []);
+  // Input Handler Function
   const inputHandler = () => {
+    // Check Validation
     if (regex.test(salaryRef.current.value) === false) {
       salaryRef.current.value = "";
     } else if (regex.test(hraRef.current.value) === false) {
@@ -20,6 +38,7 @@ function IncomeDetails() {
     } else if (regex.test(aioRef.current.value) === false) {
       aioRef.current.value = "";
     } else {
+      // Set Data into Context State
       data.setIncome({
         salary: Number(salaryRef.current.value),
         hra: Number(hraRef.current.value),
@@ -42,7 +61,7 @@ function IncomeDetails() {
             type="text"
             class="form-control"
             aria-label="Amount (to the nearest dollar)"
-            placeholder="Basic Salary Per Annum"
+            placeholder="Basic Salary Per Annum*"
           />
         </div>
         <div class="input-group mb-3">
@@ -53,7 +72,7 @@ function IncomeDetails() {
             type="text"
             class="form-control"
             aria-label="Amount (to the nearest dollar)"
-            placeholder="HRA Recieved Per Annum"
+            placeholder="HRA Recieved Per Annum*"
           />
         </div>
         <div class="input-group mb-3">
@@ -64,7 +83,7 @@ function IncomeDetails() {
             type="text"
             class="form-control"
             aria-label="Amount (to the nearest dollar)"
-            placeholder="LTA"
+            placeholder="LTA*"
           />
         </div>
         <div class="input-group mb-3">
@@ -75,7 +94,7 @@ function IncomeDetails() {
             type="text"
             class="form-control"
             aria-label="Amount (to the nearest dollar)"
-            placeholder="Annual Income From Other Sources"
+            placeholder="Annual Income From Other Sources*"
           />
         </div>
       </div>
