@@ -13,7 +13,8 @@
 
 /* CSS For Form Main Din*/
 
-.formDiv {
+.formDiv,
+.alertContainer {
   width: 60%;
   margin: auto;
 }

@@ -53,8 +53,8 @@ function IncomeDetails() {
       <h1 style={{ textAlign: "center" }}>Income Details</h1>
       <br></br>
       <div className="formDiv">
-        <div class="input-group mb-3">
-          <span class="input-group-text rupeeSpan">₹</span>
+        <div className="input-group mb-3">
+          <span className="input-group-text rupeeSpan">₹</span>
           <input
             ref={salaryRef}
             onChange={inputHandler}
@@ -64,8 +64,8 @@ function IncomeDetails() {
             placeholder="Basic Salary Per Annum*"
           />
         </div>
-        <div class="input-group mb-3">
-          <span class="input-group-text rupeeSpan">₹</span>
+        <div className="input-group mb-3">
+          <span className="input-group-text rupeeSpan">₹</span>
           <input
             ref={hraRef}
             onChange={inputHandler}
@@ -75,8 +75,8 @@ function IncomeDetails() {
             placeholder="HRA Recieved Per Annum*"
           />
         </div>
-        <div class="input-group mb-3">
-          <span class="input-group-text rupeeSpan">₹</span>
+        <div className="input-group mb-3">
+          <span className="input-group-text rupeeSpan">₹</span>
           <input
             ref={ltaRef}
             onChange={inputHandler}
@@ -86,13 +86,13 @@ function IncomeDetails() {
             placeholder="LTA*"
           />
         </div>
-        <div class="input-group mb-3">
-          <span class="input-group-text rupeeSpan">₹</span>
+        <div className="input-group mb-3">
+          <span className="input-group-text rupeeSpan">₹</span>
           <input
             ref={aioRef}
             onChange={inputHandler}
             type="text"
-            class="form-control"
+            className="form-control"
             aria-label="Amount (to the nearest dollar)"
             placeholder="Annual Income From Other Sources*"
           />

@@ -96,14 +96,23 @@ export default function LinearStepper() {
               <Summary />
             ) : null}
           </Typography>
-          {message !== "" ? (
-            <div
-              class="alert alert-warning alert-dismissible fade show"
-              role="alert"
-            >
-              {message}
-            </div>
-          ) : null}
+          <div className="alertContainer">
+            {message !== "" ? (
+              <div
+                class="alert alert-warning alert-dismissible fade show"
+                role="alert"
+              >
+                <span>{message}</span>
+                <button
+                  type="button"
+                  class="btn-close"
+                  // data-bs-dismiss="alert"
+                  // aria-label="Close"
+                  onClick={() => setMessage("")}
+                ></button>
+              </div>
+            ) : null}
+          </div>
 
           <Box sx={{ display: "flex", flexDirection: "row", pt: 2 }}>
             <Button
