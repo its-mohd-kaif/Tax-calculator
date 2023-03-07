@@ -72,7 +72,7 @@ function Summary() {
   };
   // Function of calculate Old Tax Regime
   const existingTaxRegime = (income) => {
-    let tempIncome = income - 250000;
+    let tempIncome = income;
     let tempTaxAmout = 0;
     if (tempIncome <= 250000) {
       tempTaxAmout = 0;
@@ -89,12 +89,12 @@ function Summary() {
   };
   // Function of calculate New Tax Regime
   const newTaxRegime = (income) => {
-    let tempIncome = income - 250000;
+    let tempIncome = income;
     let tempTaxAmout = 0;
     if (tempIncome <= 250000) {
       tempTaxAmout = 0;
     } else if (tempIncome >= 250001 && tempIncome <= 500000) {
-      tempTaxAmout = parseInt((tempIncome * 5) / 100);
+      tempTaxAmout = parseInt(((tempIncome - 250000) * 5) / 100);
     } else if (tempIncome >= 500001 && tempIncome <= 750000) {
       tempTaxAmout = parseInt(((tempIncome - 500000) * 10) / 100);
       tempTaxAmout = tempTaxAmout + 12500;
@@ -155,6 +155,11 @@ function Summary() {
               <td></td>
             </tr>
             <tr>
+              <td>Standard Deduction</td>
+              <td>Rs 50000</td>
+              <td>-</td>
+            </tr>
+            <tr>
               <td>80C</td>
               <td>Rs {dataDeduction.deduction.ded_80Cref}</td>
               <td></td>
@@ -167,12 +172,23 @@ function Summary() {
             <tr>
               <td>80TTA</td>
               <td>Rs {dataDeduction.deduction.ded_80TTAref}</td>
+              <td></td>
+            </tr>
+            <tr>
+              <td>Total Deduction</td>
+              <td></td>
               <td>
                 Rs{" "}
                 {dataDeduction.deduction.ded_80Cref +
                   dataDeduction.deduction.ded_80Dref +
-                  dataDeduction.deduction.ded_80TTAref}
+                  dataDeduction.deduction.ded_80TTAref +
+                  50000}
               </td>
+            </tr>
+            <tr>
+              <td style={{ fontWeight: "bolder" }}>HRA Exemption</td>
+              <td></td>
+              <td>Rs {exemption}</td>
             </tr>
             <tr>
               <td style={{ fontWeight: "bolder" }}>Gross Taxable Income</td>
